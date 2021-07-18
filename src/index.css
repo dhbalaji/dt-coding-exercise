@@ -1,13 +1,93 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Utilities */
+.rounded-custom {
+    border-radius: 1rem !important;
+}
+
+.rounded-custom-bottom {
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
+.rounded-custom-sm {
+    border-radius: 0.5rem !important;
+}
+
+.px-sm-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.pt-sm-0 {
+    padding-top: 0 !important;
+}
+
+
+.page-item a {
+    color: #007B94;
+    cursor: pointer;
+}
+
+.page-item.active {
+    background: #007B94;
+    color: white;
+}
+
+.filter-results {
+    background: rgb(60, 62, 66);
+    background: linear-gradient(90deg, rgba(60, 62, 66, 1) 0%, rgba(35, 37, 40, 1) 100%);
+}
+
+
+/* Range CSS */
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type='range'] {
+        overflow: hidden;
+        -webkit-appearance: none;
+        height: 40px;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+        height: 10px;
+        -webkit-appearance: none;
+        color: #309AB5;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+        width: 20px;
+        -webkit-appearance: none;
+        height: 20px;
+        /*cursor: ew-resize;*/
+        background: #309AB5;
+        /*box-shadow: -80px 0 0 80px #309AB5;*/
+    }
+}
+
+/* Overrides */
+.fs-1 {
+    font-size: 36px !important;
+}
+
+.fs-2 {
+    font-size: 28px !important;
+}
+
+.fs-3 {
+    font-size: 20px !important;
+}
+
