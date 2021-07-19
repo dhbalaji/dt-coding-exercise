@@ -3,8 +3,8 @@ import SalesFilterWithAccessChecks from './global-sales-page/SalesFilter';
 import SalesData from './global-sales-page/sales-data/SalesDataWrapper';
 import TopPerformers from './global-sales-page/TopPerformers';
 import {GLOBAL_SALES_FILTER, GLOBAL_SALES_PAGE, READ_WRITE} from './common/constants';
-import {getHeaders} from './common/ApiHelper';
-import {API_BASE_PATH, SALES_DATA_API} from './config';
+import {fetchSalesData} from './common/ApiHelper';
+import {salesDataAdapter} from './common/salesDataAdapter';
 import './App.css';
 
 /*
@@ -33,27 +33,22 @@ function App() {
     // Api call to load data
     useEffect(() => {
         // Error handling not implemented as part of this assignment
-        fetch(
-            `/${API_BASE_PATH}/${SALES_DATA_API}`,
-            {
-                method: "GET",
-                headers: getHeaders()
-            }
-        )
+        fetchSalesData()
             .then(response => response.json())
             .then((data) => {
-                setSalesData(data);
+                setSalesData(salesDataAdapter(data));
                 setLoading(false);
                 setPage(1);
             });
     }, []);
+    const {topPerformerCount, topPerformerAverage} = salesData;
 
     return (
         <main className="container container-md p-4">
             <h1 className="fw-bold fs-1">Global Sales</h1>
             <SalesFilterWithAccessChecks access={appAccessObj}/>
             <SalesData {...{salesData, page, loading, setSalesData, setLoading, setPage}} />
-            <TopPerformers/>
+            <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
         </main>
     );
 }

@@ -1,24 +1,19 @@
 import React from "react";
 import SalesDataTable from './SalesDataTable';
 import SalesDataPagination from './SalesDataPagination';
-import {getHeaders} from '../../common/ApiHelper';
-import {API_BASE_PATH, SALES_DATA_API} from '../../config';
+import {fetchSalesData} from '../../common/ApiHelper';
+import {salesDataAdapter} from '../../common/salesDataAdapter';
 
-function SalesData({salesData = [], page, setSalesData, setLoading, setPage}) {
-    const salesDataLength = salesData.length;
+function SalesData({salesData, page, setSalesData, setLoading, setPage, numberOfPages}) {
 
     const refreshHandler = () => {
-        fetch(
-            `/${API_BASE_PATH}/${SALES_DATA_API}`,
-            {
-                method: "GET",
-                headers: getHeaders(true)
-            }
-        ).then(response => response.json()).then((data) => {
-            setSalesData(data);
-            setLoading(false);
-            setPage(1);
-        });
+        fetchSalesData(true)
+            .then(response => response.json())
+            .then((data) => {
+                setSalesData(salesDataAdapter(data));
+                setLoading(false);
+                setPage(1);
+            });
     };
 
     return (
@@ -28,7 +23,7 @@ function SalesData({salesData = [], page, setSalesData, setLoading, setPage}) {
                 <p className="text-uppercase fw-bold pt-2" role="button" onClick={refreshHandler}>Refresh Data</p>
             </div>
             <SalesDataTable {...{page, salesData}}/>
-            <SalesDataPagination {...{page, salesDataLength, setPage}}/>
+            <SalesDataPagination {...{page, numberOfPages, setPage}}/>
         </section>
     )
 }
