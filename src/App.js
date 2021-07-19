@@ -7,6 +7,7 @@ import {fetchSalesData} from './common/ApiHelper';
 import {salesDataAdapter} from './common/salesDataAdapter';
 import './App.css';
 import {salesFilterFactory} from './common/salesFilterFactory';
+import AppLoader from './common/components/Apploader';
 
 /*
     In larger apps we make a authorization API call to check if user has access to perform all the operations of the APP or not.
@@ -34,13 +35,17 @@ function App() {
 
     // Api call to load data
     useEffect(() => {
+        setLoading(true);
         // Error handling not implemented as part of this assignment
         fetchSalesData()
             .then(response => response.json())
             .then((data) => {
-                setSalesData(salesDataAdapter(data));
-                setSalesResp(data);
-                setLoading(false);
+                const responseFromSalesAdapter = salesDataAdapter(data);
+                setSalesData(responseFromSalesAdapter);
+                setSalesResp(responseFromSalesAdapter.sales);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 500); // to show spinner on dummy api
                 setPage(1);
             });
     }, []);
@@ -55,6 +60,9 @@ function App() {
         } else {
             setFilterResultsCount(0);
         }
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
@@ -64,15 +72,27 @@ function App() {
     } = salesData;
 
     return (
-        <main className="container container-md p-4">
-            <h1 className="fw-bold fs-1">Global Sales</h1>
-            <SalesFilterWithAccessChecks access={appAccessObj} {...{
-                filter, setFilter, leastSalesValue,
-                maxSalesValue, filterResultsCount, setPage
-            }}/>
-            <SalesData {...{...salesData, page, loading, setSalesData, setLoading, setPage, setSalesResp, setFilter}} />
-            <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
-        </main>
+        <>
+            <main className="container container-md p-4">
+                <h1 className="fw-bold fs-1">Global Sales</h1>
+                <SalesFilterWithAccessChecks access={appAccessObj} {...{
+                    filter, setFilter, leastSalesValue,
+                    maxSalesValue, filterResultsCount, setPage, setLoading
+                }}/>
+                <SalesData {...{
+                    ...salesData,
+                    page,
+                    loading,
+                    setSalesData,
+                    setLoading,
+                    setPage,
+                    setSalesResp,
+                    setFilter
+                }} />
+                <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
+            </main>
+            <AppLoader {...{loading}} />
+        </>
     );
 }
 

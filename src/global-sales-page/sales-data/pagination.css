@@ -14,3 +14,7 @@
 .pagination li {
     cursor: pointer;
 }
+
+.pagination li.disabled {
+    cursor: auto;
+}

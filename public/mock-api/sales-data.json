@@ -598,23 +598,5 @@
     "name": "Bennie",
     "company": "Friesen LLC",
     "sales": 614.13
-  },
-  {
-    "id": 198,
-    "name": "Dayle",
-    "company": "Grant-Williamson",
-    "sales": 1325.99
-  },
-  {
-    "id": 199,
-    "name": "Filmore",
-    "company": "Kozey and Sons",
-    "sales": 1395.17
-  },
-  {
-    "id": 200,
-    "name": "Bennie",
-    "company": "Friesen LLC",
-    "sales": 614.13
   }
 ]

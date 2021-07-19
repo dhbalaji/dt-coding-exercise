@@ -6,14 +6,23 @@ export const salesDataAdapter = (response = []) => {
         const {sales} = item;
         return roundOfToNearestNumber(sales) >= TOP_PERFORMER_BASELINE;
     });
-    const topPerformerCount = topPerformers.length;
+    const topPerformerCount = Math.round((topPerformers.length / response.length) * 100);
     const topPerformerAverage = roundOfToNearestNumber(topPerformers.reduce((acc, {sales}) => acc + sales, 0) / topPerformerCount);
     const totalSales = roundOfToNearestNumber(response.reduce((acc, {sales}) => acc + sales, 0));
     const sortedSales = [...response].sort((a, b) => a.sales - b.sales);
     const leastSalesValue = Math.floor(sortedSales[0].sales);
     const maxSalesValue = Math.floor(sortedSales[response.length - 1].sales);
+    const responseWithTopPerformersFlag = response.map((item) => {
+        const {sales} = item;
+        let isTopPerformer = false;
+        if (sales >= TOP_PERFORMER_BASELINE) {
+            isTopPerformer = true
+        }
+        return {...item, isTopPerformer}
+    });
+
     return {
-        sales: response,
+        sales: responseWithTopPerformersFlag,
         topPerformerCount,
         topPerformerAverage,
         totalSales,

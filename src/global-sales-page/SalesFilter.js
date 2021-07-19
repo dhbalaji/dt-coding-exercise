@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
+import InputRange from 'react-input-range';
 import {GLOBAL_SALES_FILTER} from '../common/constants';
 import WithAccessChecks from '../common/WithAccessChecks';
 
 function SalesFilter({
                          setFilter, leastSalesValue,
-                         maxSalesValue, filterResultsCount, filter
+                         maxSalesValue, filterResultsCount, filter, setLoading
                      }) {
     /*
         Component level validation has been implemented.
@@ -34,6 +35,7 @@ function SalesFilter({
     }, [companyName, minSales]);
 
     const filterData = () => {
+        setLoading(true);
         setFilter({companyName, minSales});
     };
     return (
@@ -48,9 +50,9 @@ function SalesFilter({
                 <p className="fs-3 link-secondary mb-0">Minimum Sales ($)</p>
                 <div className="row mb-3">
                     <div className="col-9">
-                        <input type="range" className="form-range" min={leastSalesValue} max={maxSalesValue}
+                        <InputRange className="form-range" minValue={leastSalesValue} maxValue={maxSalesValue}
                                value={minSales}
-                               aria-label="Minimum Sales ($)" onChange={(e) => setMinSales(e.target.value)}/>
+                               aria-label="Minimum Sales ($)" onChange={(value) => setMinSales(value)}/>
                     </div>
                     <div className="col-3">
                         <input type="text" className="form-control form-control-lg" value={minSales} disabled/>
@@ -69,7 +71,7 @@ function SalesFilter({
 
 const FilterResultsDisplay = ({filterResultsCount}) => {
     if (filterResultsCount > 0) {
-        return <p className="m-auto mb-3 text-primary fs-5">{filterResultsCount} result(s) found</p>
+        return <p className="m-auto mb-3 text-black-50 fs-5">{filterResultsCount} result(s) found</p>
     }
     return null
 };

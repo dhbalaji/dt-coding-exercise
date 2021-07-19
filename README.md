@@ -23,11 +23,15 @@ To run the application
 
 5. Functional programming concepts like pure functions have been used to prevent `side effects`.
 
-## Feature additions other than scope
+## Feature additions & corrections
 
 1. Added `usability aspects` like, in place feedback when action is performed like filter results below the filter action button.
 
-2. `Accessibility features` like keyboard navigation have been checked.
+2. Added currency labels for page sales & total sales so that it represents monetary value at one glance. Same has been added in table header.
+
+3. Used standard formatting for monetary number formatting instead of dot which was mentioned in mock up. It was confusing whether it was decimal point or formatting dot.
+
+4. Added configuration based conditions for currency, number of rows, pagination pills count so that the app can be scaled easily.
 
 ## Config parameters used
 

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {formatCurrencyWithSymbol} from '../../common/formatters';
 import {CURRENCY, PAGE_SIZE} from '../../config';
+import UpArrowAnimated from '../../common/components/UpArrowAnimated';
+import './salesTable.css';
 
 /*
 Known usability issues:
@@ -34,10 +36,13 @@ class SalesDataTable extends Component {
                     <tbody>
                     {
                         Array.isArray(pagedSales) && pagedSales.map(({
-                                                                         id, name, company, sales: salesPerMonth
+                                                                         id, name, company, sales: salesPerMonth, isTopPerformer
                                                                      }) => (
                             <tr key={id}>
-                                <td className="px-sm-4 text-capitalize">{name}</td>
+                                <td className="px-sm-4 text-capitalize">
+                                    <span className="me-1">{name}</span>
+                                    {isTopPerformer ? <UpArrowAnimated/> : null}
+                                </td>
                                 <td className="px-sm-4">{company}</td>
                                 <td className="px-sm-4 text-end">{salesPerMonth}</td>
                             </tr>
