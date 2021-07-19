@@ -6,6 +6,7 @@ import {GLOBAL_SALES_FILTER, GLOBAL_SALES_PAGE, READ_WRITE} from './common/const
 import {fetchSalesData} from './common/ApiHelper';
 import {salesDataAdapter} from './common/salesDataAdapter';
 import './App.css';
+import {salesFilterFactory} from './common/salesFilterFactory';
 
 /*
     In larger apps we make a authorization API call to check if user has access to perform all the operations of the APP or not.
@@ -24,11 +25,12 @@ const appAccessObj = {
 function App() {
     // We can make API call to get access/authorization checks.
     // To keep it simple, I am passing appAccessObj directly instead of context for time being.
-
-
-    const [salesData, setSalesData] = useState([]);
+    const [salesResp, setSalesResp] = useState([]);
+    const [salesData, setSalesData] = useState({});
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [filter, setFilter] = useState({});
+    const [filterResultsCount, setFilterResultsCoumt] = useState({});
 
     // Api call to load data
     useEffect(() => {
@@ -37,17 +39,31 @@ function App() {
             .then(response => response.json())
             .then((data) => {
                 setSalesData(salesDataAdapter(data));
+                setSalesResp(data);
                 setLoading(false);
                 setPage(1);
             });
     }, []);
-    const {topPerformerCount, topPerformerAverage} = salesData;
+
+    useEffect(() => {
+        setPage(1);
+        if (Object.keys(filter).length) {
+            const filteredResults = salesFilterFactory(salesResp, filter);
+            setSalesData({...salesData, sales: filteredResults});
+            setFilterResultsCoumt(filteredResults.length);
+        } else {
+            setFilterResultsCoumt(0);
+        }
+    }, [filter]);
+    const {topPerformerCount, topPerformerAverage, leastSalesValue,
+        maxSalesValue} = salesData;
 
     return (
         <main className="container container-md p-4">
             <h1 className="fw-bold fs-1">Global Sales</h1>
-            <SalesFilterWithAccessChecks access={appAccessObj}/>
-            <SalesData {...{...salesData, page, loading, setSalesData, setLoading, setPage}} />
+            <SalesFilterWithAccessChecks access={appAccessObj} {...{filter, setFilter, leastSalesValue,
+                maxSalesValue, filterResultsCount}}/>
+            <SalesData {...{...salesData, page, loading, setSalesData, setLoading, setPage, setSalesResp, setFilter}} />
             <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
         </main>
     );

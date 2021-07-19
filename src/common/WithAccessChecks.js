@@ -14,7 +14,7 @@ const WithAccessChecks = (WrappedComponent, moduleName) => {
                 return null;
             }
 
-            return <WrappedComponent isReadWrite={moduleAccess === READ_WRITE} isReadOnly={moduleAccess === READ_ONLY}/>
+            return <WrappedComponent {...this.props} isReadWrite={moduleAccess === READ_WRITE} isReadOnly={moduleAccess === READ_ONLY}/>
         }
     }
 

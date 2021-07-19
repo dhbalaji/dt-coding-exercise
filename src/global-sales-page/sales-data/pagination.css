@@ -10,3 +10,7 @@
 .pagination ul {
     margin: 0 auto;
 }
+
+.pagination li {
+    cursor: pointer;
+}

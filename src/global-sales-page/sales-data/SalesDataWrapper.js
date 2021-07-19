@@ -5,8 +5,8 @@ import {fetchSalesData} from '../../common/ApiHelper';
 import {salesDataAdapter} from '../../common/salesDataAdapter';
 import {PAGE_SIZE} from '../../config';
 
-function SalesData({sales = [], topPerformerAverage, topPerformerCount, totalSales, page, setSalesData, setLoading, setPage, numberOfPages}) {
-
+function SalesData({sales = [], totalSales, page, setSalesData, setLoading, setPage, setSalesResp, setFilter}) {
+    const numberOfPages = Math.ceil(sales.length / PAGE_SIZE);
     const refreshHandler = () => {
         fetchSalesData(true)
             .then(response => response.json())
@@ -14,6 +14,8 @@ function SalesData({sales = [], topPerformerAverage, topPerformerCount, totalSal
                 setSalesData(salesDataAdapter(data));
                 setLoading(false);
                 setPage(1);
+                setSalesResp(data);
+                setFilter({});
             });
     };
 
