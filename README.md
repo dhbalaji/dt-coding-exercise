@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Solution to tech assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To run the application
 
-## Available Scripts
+1. Checkout the project from github `git clone git@github.com:dhbalaji/sabre-dt-coding-exercise.git`
 
-In the project directory, you can run:
+2. Change directory `cd sabre-dt-coding-exercise`
 
-### `yarn start`
+3. Install npm packages `npm i`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. To run the application `npm start`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+## Technical Notes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Used `react` for view layer & `bootstrap 5` for styling.
 
-### `yarn build`
+2. Have lifted state wherever possible and managed state with `react state` concept. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. `Redux is not used` because the application state management use case was not compelling like multiple screens, many components communicating with each other.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Used `react hooks` to build components.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Functional programming concepts like pure functions have been used to prevent `side effects`.
 
-### `yarn eject`
+## Feature additions other than scope
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Added `usability aspects` like, in place feedback when action is performed like filter results below the filter action button.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. `Accessibility features` like keyboard navigation have been checked.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Config parameters used
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Page size for display - 10
+- Currency for formatting and display of values - USD
+- Top performer baseline value - 800
+- Number of pills in the paging toolbar - 5
 
-## Learn More
+Visit [./src/config.js]()
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Other production grade features that are implemented
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Demonstrated how access privileges can be handled with help of POC [./src/common/WithAccessChecks.js]()
 
-### Code Splitting
+- Used `adapter` module to convert response to match application requirements. Moreover the code in the adaptor is not re-rendered like the component code, keeping up the app `performance`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Used `formatters` in one module to promote reuse and easy maintainability.
 
-### Analyzing the Bundle Size
+- API calls related methods are put in one module which can be moved to `redux middleware` when the application spans to multiple pages/screens.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- All utility, formatters, factory & adaptor methods are pure functions. This helps to reduce defects caused by `side effects`.
 
-### Making a Progressive Web App
+## Product backlog
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The next steps to improve this application would be
 
-### Advanced Configuration
+1. Filter field values to be linked to URL so that the application state can be bookmarked or shared.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. The design on the large screens can be enhanced. For example, the filter and top performer can be pulled to left and the data table on the right.
 
-### Deployment
+3. The layout shift on paging toolbar navigation can be avoided with some design modification like using ellipsis in table cell.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Decisions made in the interest of time
 
-### `yarn build` fails to minify
+As a senior dev, I try to adhere to best programming practices. However to finish the assignment on time, few compromises have been made
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Unit testing has not been added to the codebase. Instead the application is manually tested for below scenarios
+
+- Clean state where there is no data
+- Data returned is ideal
+- Data is in excess.
+
+2. Data sets in the tune of thousands of array items have not been dealt with. That calls for virtualized tables and reduced looping to prevent slowness of the UI.
+
+3. Lighthouse performance audits and web vitals are not prioritized.

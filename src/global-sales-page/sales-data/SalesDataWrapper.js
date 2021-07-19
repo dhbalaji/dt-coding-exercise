@@ -25,7 +25,7 @@ function SalesData({sales = [], totalSales, page, setSalesData, setLoading, setP
                 <h2 className="fs-2 fw-bold">Sales Data</h2>
                 <p className="text-uppercase fw-bold pt-2" role="button" onClick={refreshHandler}>Refresh Data</p>
             </div>
-            <SalesDataTable {...{page, sales, totalSales}}/>
+            <SalesDataTable {...{page, sales, totalSales, salesLength: sales.length}}/>
             <SalesDataPagination {...{page, numberOfPages, setPage, salesLength: sales.length}}/>
         </section>
     )

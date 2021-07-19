@@ -13,7 +13,8 @@ class SalesDataTable extends Component {
         const {
             totalSales,
             sales = {},
-            page
+            page,
+            salesLength
         } = this.props;
         const startIndex = page !== 1 ? ((page - 1)  * PAGE_SIZE) : 0;
         const endIndex = startIndex + PAGE_SIZE;
@@ -44,6 +45,9 @@ class SalesDataTable extends Component {
                     }
                     </tbody>
                 </table>
+                {
+                    salesLength === 0 ? <p>No data found</p> : null
+                }
                 <div className="p-3 px-sm-4 bg-light rounded-bottom rounded-custom-bottom">
                     <div className="d-flex flex-row bd-highlight justify-content-between fw-bold">
                         <p className="mb-0">Page Sales Subtotal</p>

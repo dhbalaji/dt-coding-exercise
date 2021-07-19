@@ -30,7 +30,7 @@ function App() {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState({});
-    const [filterResultsCount, setFilterResultsCoumt] = useState({});
+    const [filterResultsCount, setFilterResultsCount] = useState({});
 
     // Api call to load data
     useEffect(() => {
@@ -45,24 +45,31 @@ function App() {
             });
     }, []);
 
+    // Filter data logic
     useEffect(() => {
         setPage(1);
         if (Object.keys(filter).length) {
             const filteredResults = salesFilterFactory(salesResp, filter);
             setSalesData({...salesData, sales: filteredResults});
-            setFilterResultsCoumt(filteredResults.length);
+            setFilterResultsCount(filteredResults.length);
         } else {
-            setFilterResultsCoumt(0);
+            setFilterResultsCount(0);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
-    const {topPerformerCount, topPerformerAverage, leastSalesValue,
-        maxSalesValue} = salesData;
+
+    const {
+        topPerformerCount, topPerformerAverage, leastSalesValue,
+        maxSalesValue
+    } = salesData;
 
     return (
         <main className="container container-md p-4">
             <h1 className="fw-bold fs-1">Global Sales</h1>
-            <SalesFilterWithAccessChecks access={appAccessObj} {...{filter, setFilter, leastSalesValue,
-                maxSalesValue, filterResultsCount}}/>
+            <SalesFilterWithAccessChecks access={appAccessObj} {...{
+                filter, setFilter, leastSalesValue,
+                maxSalesValue, filterResultsCount, setPage
+            }}/>
             <SalesData {...{...salesData, page, loading, setSalesData, setLoading, setPage, setSalesResp, setFilter}} />
             <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
         </main>

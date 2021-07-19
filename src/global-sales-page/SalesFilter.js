@@ -2,8 +2,10 @@ import React, {useState, useEffect} from "react";
 import {GLOBAL_SALES_FILTER} from '../common/constants';
 import WithAccessChecks from '../common/WithAccessChecks';
 
-function SalesFilter({setFilter, leastSalesValue,
-                         maxSalesValue, filterResultsCount, filter}) {
+function SalesFilter({
+                         setFilter, leastSalesValue,
+                         maxSalesValue, filterResultsCount, filter
+                     }) {
     /*
         Component level validation has been implemented.
         Field level validation like alphanumeric etc has been skipped in the interest of time.
@@ -32,7 +34,7 @@ function SalesFilter({setFilter, leastSalesValue,
     }, [companyName, minSales]);
 
     const filterData = () => {
-      setFilter({companyName, minSales});
+        setFilter({companyName, minSales});
     };
     return (
         <div className="card rounded-custom fs-3">
@@ -41,12 +43,13 @@ function SalesFilter({setFilter, leastSalesValue,
                     <input type="text" className="form-control form-control-lg rounded-custom-sm"
                            placeholder="Company"
                            aria-label="Company"
-                    onChange={(e) => setCompanyName(e.target.value)} value={companyName}/>
+                           onChange={(e) => setCompanyName(e.target.value)} value={companyName}/>
                 </div>
                 <p className="fs-3 link-secondary mb-0">Minimum Sales ($)</p>
                 <div className="row mb-3">
                     <div className="col-9">
-                        <input type="range" className="form-range" min={leastSalesValue} max={maxSalesValue} value={minSales}
+                        <input type="range" className="form-range" min={leastSalesValue} max={maxSalesValue}
+                               value={minSales}
                                aria-label="Minimum Sales ($)" onChange={(e) => setMinSales(e.target.value)}/>
                     </div>
                     <div className="col-3">
