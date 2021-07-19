@@ -3,8 +3,9 @@ import SalesDataTable from './SalesDataTable';
 import SalesDataPagination from './SalesDataPagination';
 import {fetchSalesData} from '../../common/ApiHelper';
 import {salesDataAdapter} from '../../common/salesDataAdapter';
+import {PAGE_SIZE} from '../../config';
 
-function SalesData({salesData, page, setSalesData, setLoading, setPage, numberOfPages}) {
+function SalesData({sales = [], topPerformerAverage, topPerformerCount, totalSales, page, setSalesData, setLoading, setPage, numberOfPages}) {
 
     const refreshHandler = () => {
         fetchSalesData(true)
@@ -22,8 +23,8 @@ function SalesData({salesData, page, setSalesData, setLoading, setPage, numberOf
                 <h2 className="fs-2 fw-bold">Sales Data</h2>
                 <p className="text-uppercase fw-bold pt-2" role="button" onClick={refreshHandler}>Refresh Data</p>
             </div>
-            <SalesDataTable {...{page, salesData}}/>
-            <SalesDataPagination {...{page, numberOfPages, setPage}}/>
+            <SalesDataTable {...{page, sales, totalSales}}/>
+            <SalesDataPagination {...{page, numberOfPages, setPage, salesLength: sales.length}}/>
         </section>
     )
 }

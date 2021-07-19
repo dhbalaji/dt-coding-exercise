@@ -1,0 +1,12 @@
+.pagination .prev, .pagination .next {
+    font-size: 3rem;
+    margin-top: -1.75rem;
+}
+
+.pagination .prev {
+    margin-right: 0.5rem ;
+}
+
+.pagination ul {
+    margin: 0 auto;
+}

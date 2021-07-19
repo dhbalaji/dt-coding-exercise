@@ -14,6 +14,6 @@ export const salesDataAdapter = (response = []) => {
         topPerformerCount,
         topPerformerAverage,
         totalSales,
-        numberOfPages: response.length / PAGE_SIZE
+        numberOfPages: Math.ceil(response.length / PAGE_SIZE)
     };
 }

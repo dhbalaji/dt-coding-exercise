@@ -47,7 +47,7 @@ function App() {
         <main className="container container-md p-4">
             <h1 className="fw-bold fs-1">Global Sales</h1>
             <SalesFilterWithAccessChecks access={appAccessObj}/>
-            <SalesData {...{salesData, page, loading, setSalesData, setLoading, setPage}} />
+            <SalesData {...{...salesData, page, loading, setSalesData, setLoading, setPage}} />
             <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
         </main>
     );

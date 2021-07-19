@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {CURRENCY, TOP_PERFORMER_BASELINE} from '../config';
 import {formatCurrencyWithSymbol} from '../common/formatters';
 
