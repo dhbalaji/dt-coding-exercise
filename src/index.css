@@ -7,6 +7,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+    --color-teal: #007B94
+}
+
 /* Utilities */
 .rounded-custom {
     border-radius: 1rem !important;
@@ -35,30 +39,3 @@ body {
     font-size: 20px !important;
 }
 
-/* Circle loader */
-:root {
-    --loader-width: 70px;
-    --loader-height: 70px;
-    --loader-color-primary: #27ae60;
-    --loader-color-secondary: #eee;
-    --line-width: 3px;
-    --animation-duration: 2s;
-    --loader-initial-scale: 0.1;
-}
-
-.loader, .loader:before, .loader:after {
-    box-sizing: border-box;
-    flex-grow: 0;
-    flex-shrink: 0;
-}
-
-@keyframes circle-loader {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* End of loader */

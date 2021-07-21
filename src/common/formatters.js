@@ -1,6 +1,6 @@
 import {CURRENCY_CODE} from '../config';
 
-export const roundOfToNearestNumber = (amt) => Math.round(amt);
+export const roundOfToNearestNumber = (value) => Math.round(value);
 
 const {format: formatCurrencyForDisplay} = new Intl.NumberFormat('en-US', {
     style: 'currency',

@@ -1,8 +1,8 @@
 /* Range CSS */
 .salesFilter .input-range__slider {
     appearance: none;
-    background: #007b94;
-    border: 1px solid #007b94;
+    background: var(--color-teal, #007b94);
+    border: 1px solid var(--color-teal);
     border-radius: 100%;
     cursor: pointer;
     display: block;
@@ -15,26 +15,32 @@
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     width: 1.5rem;
 }
+
 .salesFilter .input-range__slider:active {
     transform: scale(1.1);
 }
+
 .salesFilter .input-range__slider:focus {
     box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2);
 }
+
 .salesFilter .input-range--disabled .input-range__slider {
-    background: #ccc;
-    border: 1px solid #ccc;
+    background: var(--bs-white);
+    border: 1px solid var(--bs-white);
     box-shadow: none;
     transform: none;
 }
+
 .salesFilter .input-range__slider-container {
     transition: left 0.3s ease-out;
 }
+
 .salesFilter .input-range__label {
     display: none;
 }
+
 .salesFilter .input-range__track {
-    background: #eee;
+    background: var(--bs-light);
     border-radius: 0.3rem;
     cursor: pointer;
     display: block;
@@ -42,9 +48,11 @@
     position: relative;
     transition: left 0.3s ease-out, width 0.3s ease-out;
 }
+
 .salesFilter .input-range--disabled .input-range__track {
-    background: #eee;
+    background: var(--bs-light);
 }
+
 .salesFilter .input-range__track--background {
     left: 0;
     margin-top: -0.15rem;
@@ -52,9 +60,11 @@
     right: 0;
     top: 50%;
 }
+
 .salesFilter .input-range__track--active {
-    background: #007b94;
+    background: var(--color-teal);
 }
+
 .salesFilter .input-range {
     height: 1rem;
     position: relative;

@@ -6,12 +6,13 @@ import {salesDataAdapter} from '../../common/salesDataAdapter';
 import {PAGE_SIZE} from '../../config';
 
 function SalesData({
-                            sales = [],
-                            totalSales,
-                            page,
-                            setLoading,
-                            setPage,
-                            setApplicationDataToState}) {
+                       sales = [],
+                       totalSales,
+                       page,
+                       setLoading,
+                       setPage,
+                       setApplicationDataToState
+                   }) {
     const numberOfPages = Math.ceil(sales.length / PAGE_SIZE);
     const refreshHandler = () => {
         setLoading(true);

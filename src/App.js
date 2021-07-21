@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import SalesFilterWithAccessChecks from './global-sales-page/SalesFilter';
 import SalesData from './global-sales-page/sales-data';
 import TopPerformers from './global-sales-page/TopPerformers';
-import AppLoader from './common/components/Apploader';
+import AppLoader from './common/components/AppLoader';
 import {GLOBAL_SALES_FILTER, READ_WRITE} from './common/constants';
 import {fetchSalesData} from './common/ApiHelper';
 import {salesDataAdapter} from './common/salesDataAdapter';
 import {salesFilterFactory} from './common/salesFilterFactory';
-import './App.css';
+import './app.css';
 
 /*
     In larger apps we make a authorization API call to check if user has access to perform all the operations of the APP or not.
@@ -64,8 +64,8 @@ function App() {
     }, [filter]);
 
     const {
-        topPerformerCount,
-        topPerformerAverage,
+        topPerformersPercentage,
+        topPerformersAverageSales,
         leastSalesValue,
         maxSalesValue
     } = globalSalesObj;
@@ -108,8 +108,8 @@ function App() {
                     setApplicationDataToState
                 }}/>
                 <TopPerformers {...{
-                    topPerformerCount,
-                    topPerformerAverage
+                    topPerformersPercentage,
+                    topPerformersAverageSales
                 }}/>
             </main>
             <AppLoader {...{loading}} />

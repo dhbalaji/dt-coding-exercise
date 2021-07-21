@@ -3,10 +3,11 @@ import {NUMBER_OF_PAGINATION_PILLS} from '../../config';
 import './pagination.css';
 
 function SalesDataPagination({page, setPage, numberOfPages}) {
+    // when there is no data
     if (numberOfPages === 0) {
         return <div className="mb-3"></div>;
     }
-    let numberOfPills = numberOfPages <= NUMBER_OF_PAGINATION_PILLS ? numberOfPages : NUMBER_OF_PAGINATION_PILLS;
+    const numberOfPills = numberOfPages <= NUMBER_OF_PAGINATION_PILLS ? numberOfPages : NUMBER_OF_PAGINATION_PILLS;
     let padding = 1;
     if ((page > NUMBER_OF_PAGINATION_PILLS)) {
         if (page % NUMBER_OF_PAGINATION_PILLS === 0) {

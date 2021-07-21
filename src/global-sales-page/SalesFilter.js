@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import InputRange from 'react-input-range';
 import {GLOBAL_SALES_FILTER} from '../common/constants';
 import WithAccessChecks from '../common/WithAccessChecks';
-import './salesFilter.css';
 import {CURRENCY} from '../config';
+import './salesFilter.css';
 
 function SalesFilter({
                          setFilter,
