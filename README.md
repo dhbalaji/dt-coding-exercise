@@ -47,12 +47,52 @@ To run the application
 
 - Number of pills in the paging toolbar - 5
 
-Visit [./src/config.js]()
+```js
+export const API_BASE_PATH = "mock-api";
+export const SALES_DATA_API = "sales-data.json";
+
+export const PAGE_SIZE = 10;
+export const TOP_PERFORMER_BASELINE = 800;
+export const CURRENCY = "$";
+export const CURRENCY_CODE = "USD";
+export const NUMBER_OF_PAGINATION_PILLS = 5;
+
+```
 
 ## Other production grade features that are implemented
 
-- Demonstrated how access privileges can be handled with help of HOC [./src/common/WithAccessChecks.js]()
+- Demonstrated how access privileges can be handled with help of HOC
 
+```js
+import React from "react";
+import {HIDDEN, READ_ONLY, READ_WRITE} from './constants';
+
+const WithAccessChecks = (WrappedComponent, moduleName) => {
+    class WithAccessChecksHOC extends React.Component {
+        render() {
+            const {
+                access: {
+                    [moduleName]: moduleAccess
+                }, ...rest
+            } = this.props;
+
+            if (moduleAccess === HIDDEN) {
+                return null;
+            }
+
+            return <WrappedComponent {...rest}
+                                     isReadWrite={moduleAccess === READ_WRITE}
+                                     isReadOnly={moduleAccess === READ_ONLY}
+            />
+        }
+    }
+
+    return WithAccessChecksHOC;
+};
+
+export default WithAccessChecks;
+
+```
 - Used `adapter` module to convert response to match application requirements. The code in the adaptor is not re-rendered like the component code which improves the app `performance`
 
 - Used `formatters` in one module to promote reuse and easy maintainability.
