@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import SalesFilterWithAccessChecks from './global-sales-page/SalesFilter';
-import SalesData from './global-sales-page/sales-data/SalesDataWrapper';
+import SalesData from './global-sales-page/sales-data';
 import TopPerformers from './global-sales-page/TopPerformers';
-import {GLOBAL_SALES_FILTER, GLOBAL_SALES_PAGE, READ_WRITE} from './common/constants';
+import AppLoader from './common/components/Apploader';
+import {GLOBAL_SALES_FILTER, READ_WRITE} from './common/constants';
 import {fetchSalesData} from './common/ApiHelper';
 import {salesDataAdapter} from './common/salesDataAdapter';
-import './App.css';
 import {salesFilterFactory} from './common/salesFilterFactory';
-import AppLoader from './common/components/Apploader';
+import './App.css';
 
 /*
     In larger apps we make a authorization API call to check if user has access to perform all the operations of the APP or not.
@@ -19,19 +19,22 @@ import AppLoader from './common/components/Apploader';
     The access can be specific to each screen or sub section or same across the app. In this sample app I am using screen wise access pattern.
  */
 const appAccessObj = {
-    [GLOBAL_SALES_PAGE]: READ_WRITE,
     [GLOBAL_SALES_FILTER]: READ_WRITE
 };
 
 function App() {
+
     // We can make API call to get access/authorization checks.
     // To keep it simple, I am passing appAccessObj directly instead of context for time being.
-    const [salesResp, setSalesResp] = useState([]);
-    const [salesData, setSalesData] = useState({});
+
+
+    // We are not using redux, so we are lifting the state to this component
+    const [salesResponseCopy, setSalesResponseCopy] = useState([]);
+    const [globalSalesObj, setGlobalSalesObj] = useState({});
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState({});
-    const [filterResultsCount, setFilterResultsCount] = useState({});
+    const [filteredResultsCount, setFilteredResultsCount] = useState(0);
 
     // Api call to load data
     useEffect(() => {
@@ -40,56 +43,74 @@ function App() {
         fetchSalesData()
             .then(response => response.json())
             .then((data) => {
-                const responseFromSalesAdapter = salesDataAdapter(data);
-                setSalesData(responseFromSalesAdapter);
-                setSalesResp(responseFromSalesAdapter.sales);
-                setTimeout(() => {
-                    setLoading(false);
-                }, 500); // to show spinner on dummy api
-                setPage(1);
+                setApplicationDataToState(salesDataAdapter(data));
             });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Filter data logic
+    // Filter sales data logic
     useEffect(() => {
+        setLoading(true);
         setPage(1);
         if (Object.keys(filter).length) {
-            const filteredResults = salesFilterFactory(salesResp, filter);
-            setSalesData({...salesData, sales: filteredResults});
-            setFilterResultsCount(filteredResults.length);
+            const filteredResults = salesFilterFactory(salesResponseCopy, filter);
+            setGlobalSalesObj({...globalSalesObj, sales: filteredResults});
+            setFilteredResultsCount(filteredResults.length);
         } else {
-            setFilterResultsCount(0);
+            setFilteredResultsCount(0);
         }
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
+        stopLoadingWithDelay();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
     const {
-        topPerformerCount, topPerformerAverage, leastSalesValue,
+        topPerformerCount,
+        topPerformerAverage,
+        leastSalesValue,
         maxSalesValue
-    } = salesData;
+    } = globalSalesObj;
+
+    const stopLoadingWithDelay = () => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 500); // to show loader on dummy api
+    };
+
+    const setApplicationDataToState = (responseFromSalesAdapter, resetFilterAndPage) => {
+        setGlobalSalesObj(responseFromSalesAdapter);
+        setSalesResponseCopy(responseFromSalesAdapter.sales);
+        stopLoadingWithDelay();
+
+        if (resetFilterAndPage) {
+            setPage(1);
+            setFilter({});
+        }
+    };
 
     return (
         <>
             <main className="container container-md p-4">
                 <h1 className="fw-bold fs-1">Global Sales</h1>
-                <SalesFilterWithAccessChecks access={appAccessObj} {...{
-                    filter, setFilter, leastSalesValue,
-                    maxSalesValue, filterResultsCount, setPage, setLoading
+                <SalesFilterWithAccessChecks {...{
+                    filter,
+                    setFilter,
+                    leastSalesValue,
+                    maxSalesValue,
+                    filteredResultsCount,
+                    access: appAccessObj
                 }}/>
                 <SalesData {...{
-                    ...salesData,
+                    ...globalSalesObj,
                     page,
                     loading,
-                    setSalesData,
                     setLoading,
                     setPage,
-                    setSalesResp,
-                    setFilter
-                }} />
-                <TopPerformers {...{topPerformerCount, topPerformerAverage}}/>
+                    setApplicationDataToState
+                }}/>
+                <TopPerformers {...{
+                    topPerformerCount,
+                    topPerformerAverage
+                }}/>
             </main>
             <AppLoader {...{loading}} />
         </>

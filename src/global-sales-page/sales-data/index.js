@@ -5,21 +5,20 @@ import {fetchSalesData} from '../../common/ApiHelper';
 import {salesDataAdapter} from '../../common/salesDataAdapter';
 import {PAGE_SIZE} from '../../config';
 
-function SalesData({sales = [], totalSales, page, setSalesData, setLoading, setPage, setSalesResp, setFilter}) {
+function SalesData({
+                            sales = [],
+                            totalSales,
+                            page,
+                            setLoading,
+                            setPage,
+                            setApplicationDataToState}) {
     const numberOfPages = Math.ceil(sales.length / PAGE_SIZE);
     const refreshHandler = () => {
         setLoading(true);
         fetchSalesData(true)
             .then(response => response.json())
             .then((data) => {
-                const responseFromSalesAdapter = salesDataAdapter(data);
-                setSalesData(responseFromSalesAdapter);
-                setSalesResp(responseFromSalesAdapter.sales);
-                setTimeout(() => {
-                    setLoading(false);
-                }, 500); // to show spinner on dummy api
-                setPage(1);
-                setFilter({});
+                setApplicationDataToState(salesDataAdapter(data), true);
             });
     };
 

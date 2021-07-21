@@ -51,7 +51,7 @@ class SalesDataTable extends Component {
                     </tbody>
                 </table>
                 {
-                    salesLength === 0 ? <p>No data found</p> : null
+                    salesLength === 0 ? <p className="p-3">No data found</p> : null
                 }
                 <div className="p-3 px-sm-4 bg-light rounded-bottom rounded-custom-bottom">
                     <div className="d-flex flex-row bd-highlight justify-content-between fw-bold">

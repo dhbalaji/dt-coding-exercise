@@ -18,3 +18,19 @@
 .pagination li.disabled {
     cursor: auto;
 }
+
+
+.pagination .page-item a {
+    color: #007B94;
+    cursor: pointer;
+}
+
+.pagination .page-item.active {
+    background: #007B94;
+    color: white;
+}
+
+.pagination .page-link {
+    width: 37px;
+    height: 37px;
+}

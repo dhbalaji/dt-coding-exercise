@@ -2,6 +2,16 @@ import {TOP_PERFORMER_BASELINE} from '../config';
 import {roundOfToNearestNumber} from './formatters';
 
 export const salesDataAdapter = (response = []) => {
+    if (response.length === 0) {
+        return {
+            sales: [],
+            topPerformerCount: 0,
+            topPerformerAverage: 0,
+            totalSales: 0,
+            leastSalesValue: 0,
+            maxSalesValue: 0
+        };
+    }
     const topPerformers = response.filter(item => {
         const {sales} = item;
         return roundOfToNearestNumber(sales) >= TOP_PERFORMER_BASELINE;

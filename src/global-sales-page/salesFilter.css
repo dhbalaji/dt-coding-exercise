@@ -1,0 +1,68 @@
+/* Range CSS */
+.salesFilter .input-range__slider {
+    appearance: none;
+    background: #007b94;
+    border: 1px solid #007b94;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    height: 1.5rem;
+    margin-left: -0.9rem;
+    margin-top: -0.9rem;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    width: 1.5rem;
+}
+.salesFilter .input-range__slider:active {
+    transform: scale(1.1);
+}
+.salesFilter .input-range__slider:focus {
+    box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2);
+}
+.salesFilter .input-range--disabled .input-range__slider {
+    background: #ccc;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    transform: none;
+}
+.salesFilter .input-range__slider-container {
+    transition: left 0.3s ease-out;
+}
+.salesFilter .input-range__label {
+    display: none;
+}
+.salesFilter .input-range__track {
+    background: #eee;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: block;
+    height: 0.3rem;
+    position: relative;
+    transition: left 0.3s ease-out, width 0.3s ease-out;
+}
+.salesFilter .input-range--disabled .input-range__track {
+    background: #eee;
+}
+.salesFilter .input-range__track--background {
+    left: 0;
+    margin-top: -0.15rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+.salesFilter .input-range__track--active {
+    background: #007b94;
+}
+.salesFilter .input-range {
+    height: 1rem;
+    position: relative;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.salesFilter .filter-results {
+    background: rgb(60, 62, 66);
+    background: linear-gradient(90deg, rgba(60, 62, 66, 1) 0%, rgba(35, 37, 40, 1) 100%);
+}

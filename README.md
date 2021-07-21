@@ -23,36 +23,41 @@ To run the application
 
 5. Functional programming concepts like pure functions have been used to prevent `side effects`.
 
+6. `sass` has not been used, bootstrap utility classes used wherever possible.
+
 ## Feature additions & corrections
 
 1. Added `usability aspects` like, in place feedback when action is performed like filter results below the filter action button.
 
-2. Added currency labels for page sales & total sales so that it represents monetary value at one glance. Same has been added in table header.
+2. Added `currency symbol` along with numbers for page sales & total sales so that it represents monetary value at one glance. Same has been added in table header.
 
-3. Used standard formatting for monetary number formatting instead of dot which was mentioned in mock up. It was confusing whether it was decimal point or formatting dot.
+3. Used `standard formatting` for monetary number formatting instead of dot which was mentioned in mock up. It was confusing whether it was decimal point or formatting dot.
 
-4. Added configuration based conditions for currency, number of rows, pagination pills count so that the app can be scaled easily.
+4. Added `configuration based` conditions for currency, number of rows, pagination pills count so that the app can be scaled easily.
 
 ## Config parameters used
 
 - Page size for display - 10
+
 - Currency for formatting and display of values - USD
+
 - Top performer baseline value - 800
+
 - Number of pills in the paging toolbar - 5
 
 Visit [./src/config.js]()
 
 ## Other production grade features that are implemented
 
-- Demonstrated how access privileges can be handled with help of POC [./src/common/WithAccessChecks.js]()
+- Demonstrated how access privileges can be handled with help of HOC [./src/common/WithAccessChecks.js]()
 
-- Used `adapter` module to convert response to match application requirements. Moreover the code in the adaptor is not re-rendered like the component code, keeping up the app `performance`
+- Used `adapter` module to convert response to match application requirements. The code in the adaptor is not re-rendered like the component code which improves the app `performance`
 
 - Used `formatters` in one module to promote reuse and easy maintainability.
 
 - API calls related methods are put in one module which can be moved to `redux middleware` when the application spans to multiple pages/screens.
 
-- All utility, formatters, factory & adaptor methods are pure functions. This helps to reduce defects caused by `side effects`.
+- All utility, formatters, factory & adaptor methods are `pure functions`. This helps to reduce defects caused by `side effects`.
 
 ## Product backlog
 
@@ -72,8 +77,8 @@ As a senior dev, I try to adhere to best programming practices. However to finis
 
 - Clean state where there is no data
 - Data returned is ideal
-- Data is in excess.
+- Data more than 100 rows.
 
-2. Data sets in the tune of thousands of array items have not been dealt with. That calls for virtualized tables and reduced looping to prevent slowness of the UI.
+2. Data sets in the tune of thousands of array items have not been dealt with. That calls for virtualized tables, memoizing and reduced looping to prevent slowness of the UI.
 
 3. Lighthouse performance audits and web vitals are not prioritized.

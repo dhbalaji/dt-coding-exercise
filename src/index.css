@@ -7,12 +7,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-
 /* Utilities */
 .rounded-custom {
     border-radius: 1rem !important;
@@ -27,115 +21,8 @@ code {
     border-radius: 0.5rem !important;
 }
 
-.px-sm-4 {
-    padding-right: 1.5rem !important;
-    padding-left: 1.5rem !important;
-}
 
-.pt-sm-0 {
-    padding-top: 0 !important;
-}
-
-
-.page-item a {
-    color: #007B94;
-    cursor: pointer;
-}
-
-.page-item.active {
-    background: #007B94;
-    color: white;
-}
-
-.page-link {
-    width: 37px;
-    height: 37px;
-}
-
-.filter-results {
-    background: rgb(60, 62, 66);
-    background: linear-gradient(90deg, rgba(60, 62, 66, 1) 0%, rgba(35, 37, 40, 1) 100%);
-}
-
-
-/* Range CSS */
-.input-range__slider {
-    appearance: none;
-    background: #007B94;
-    border: 1px solid #007B94;
-    border-radius: 100%;
-    cursor: pointer;
-    display: block;
-    height: 1.5rem;
-    margin-left: -0.9rem;
-    margin-top: -0.9rem;
-    outline: none;
-    position: absolute;
-    top: 50%;
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-    width: 1.5rem;
-}
-
-.input-range__slider:active {
-    transform: scale(1.1);
-}
-
-.input-range__slider:focus {
-    box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2);
-}
-
-.input-range--disabled .input-range__slider {
-    background: #cccccc;
-    border: 1px solid #cccccc;
-    box-shadow: none;
-    transform: none;
-}
-
-.input-range__slider-container {
-    transition: left 0.3s ease-out;
-}
-
-.input-range__label {
-    display: none;
-}
-
-.input-range__track {
-    background: #eeeeee;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    display: block;
-    height: 0.3rem;
-    position: relative;
-    transition: left 0.3s ease-out, width 0.3s ease-out;
-}
-
-.input-range--disabled .input-range__track {
-    background: #eeeeee;
-}
-
-.input-range__track--background {
-    left: 0;
-    margin-top: -0.15rem;
-    position: absolute;
-    right: 0;
-    top: 50%;
-}
-
-.input-range__track--active {
-    background: #007B94;
-}
-
-.input-range {
-    height: 1rem;
-    position: relative;
-    width: 100%;
-    margin-top: 1rem
-}
-
-/*# sourceMappingURL=input-range.css.map */
-
-
-/* Overrides */
+/* Bootstrap Overrides */
 .fs-1 {
     font-size: 36px !important;
 }
@@ -148,15 +35,7 @@ code {
     font-size: 20px !important;
 }
 
-
-/*
-loader
- */
-
-
-/*
-The loaders use CSS custom properties (variables) to control the attributes of the loaders
-*/
+/* Circle loader */
 :root {
     --loader-width: 70px;
     --loader-height: 70px;
@@ -173,12 +52,6 @@ The loaders use CSS custom properties (variables) to control the attributes of t
     flex-shrink: 0;
 }
 
-/*
-In order to get optimal results, please only change the
-variables above and don't change anything in the actual loader code
-*/
-
-
 @keyframes circle-loader {
     0% {
         transform: rotate(0deg);
@@ -188,3 +61,4 @@ variables above and don't change anything in the actual loader code
     }
 }
 
+/* End of loader */
