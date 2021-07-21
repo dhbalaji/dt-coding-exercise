@@ -38,7 +38,7 @@ function SalesDataPagination({page, setPage, numberOfPages}) {
                         </li>)
                     })
                 }
-                <li className={`page-item rounded-pill ${((padding * NUMBER_OF_PAGINATION_PILLS) + 1) >= numberOfPages ? 'disabled' : ''}`}>
+                <li className={`page-item rounded-pill ${((padding * NUMBER_OF_PAGINATION_PILLS) + 1) > numberOfPages ? 'disabled' : ''}`}>
                     <span className="next page-link border-0 bg-transparent fw-bold" aria-label="Next"
                           onClick={() => setPage((padding * NUMBER_OF_PAGINATION_PILLS) + 1)}>
                         <span aria-hidden="true">&#x203A;</span>

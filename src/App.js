@@ -32,13 +32,13 @@ function App() {
     const [salesResponseCopy, setSalesResponseCopy] = useState([]);
     const [globalSalesObj, setGlobalSalesObj] = useState({});
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [filter, setFilter] = useState({});
     const [filteredResultsCount, setFilteredResultsCount] = useState(0);
 
     // Api call to load data
     useEffect(() => {
-        setLoading(true);
+        setIsLoading(true);
         // Error handling not implemented as part of this assignment
         fetchSalesData()
             .then(response => response.json())
@@ -50,7 +50,7 @@ function App() {
 
     // Filter sales data logic
     useEffect(() => {
-        setLoading(true);
+        setIsLoading(true);
         setPage(1);
         if (Object.keys(filter).length) {
             const filteredResults = salesFilterFactory(salesResponseCopy, filter);
@@ -72,7 +72,7 @@ function App() {
 
     const stopLoadingWithDelay = () => {
         setTimeout(() => {
-            setLoading(false);
+            setIsLoading(false);
         }, 500); // to show loader on dummy api
     };
 
@@ -102,8 +102,8 @@ function App() {
                 <SalesData {...{
                     ...globalSalesObj,
                     page,
-                    loading,
-                    setLoading,
+                    isLoading,
+                    setIsLoading,
                     setPage,
                     setApplicationDataToState
                 }}/>
@@ -112,7 +112,7 @@ function App() {
                     topPerformersAverageSales
                 }}/>
             </main>
-            <AppLoader {...{loading}} />
+            <AppLoader {...{isLoading}} />
         </>
     );
 }

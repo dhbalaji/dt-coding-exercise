@@ -9,13 +9,13 @@ function SalesData({
                        sales = [],
                        totalSales,
                        page,
-                       setLoading,
+                       setIsLoading,
                        setPage,
                        setApplicationDataToState
                    }) {
     const numberOfPages = Math.ceil(sales.length / PAGE_SIZE);
     const refreshHandler = () => {
-        setLoading(true);
+        setIsLoading(true);
         fetchSalesData(true)
             .then(response => response.json())
             .then((data) => {

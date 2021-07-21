@@ -1,7 +1,7 @@
 import './appLoader.css';
 
-function AppLoader({loading}) {
-    if (!loading) {
+function AppLoader({isLoading}) {
+    if (!isLoading) {
         return null;
     }
     return (
