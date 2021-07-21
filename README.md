@@ -1,5 +1,7 @@
 # Solution to tech assignment
 
+![screenshot](./screenshot-sales-app.png)
+
 To run the application
 
 1. Checkout the project from github `git clone git@github.com:dhbalaji/sabre-dt-coding-exercise.git`

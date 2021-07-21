@@ -1,17 +1,15 @@
 :root {
     --loader-width: 50px;
     --loader-height: 50px;
-    --loader-color-primary: #27ae60;
-    --loader-color-secondary: #eee;
     --line-width: 0.25rem;
-    --animation-duration: 2s;
+    --animation-duration: 1s;
     --loader-initial-scale: 0.1;
 }
 
 .loader.simple-circle {
     transform-origin: center center;
     border: var(--line-width, 0.25rem) solid var(--bs-white, #fff);
-    border-right-color: var(--bs-red, #00f);
+    border-right-color: var(--color-teal, #00f);
     width: var(--loader-width, 100px);
     height: var(--loader-height, 100px);
     border-radius: 50%;
@@ -19,7 +17,7 @@
     position: fixed;
     top: 40%;
     left: 50%;
-    background: var(--bs-warning);
+    background: var(--bs-light);
     opacity: 1;
 }
 
